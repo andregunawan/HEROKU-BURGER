@@ -1,0 +1,63 @@
+<div class="row">
+    <div class="col-lg-12">
+        <div class="jumbotron" style="text-align: center">
+            <img class="burgerImg" src="/assets/img/burger.png"> 
+            <h1 class="text-center">BURGER! BURGER!! BURGER!!!</h1>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-4"></div>
+    <div class="col-lg-4">
+        <form method="POST" action="/burger/insert">
+            <label>Order your burger here:</label>
+            <input type="text" class="form-control" name="newBurgerOrder" placeholder="Burger Name..." required>
+            <input type="submit" class="btn-primary" value="Submit" style="margin-top: 10px">
+        </form>
+    </div>
+    <div class="col-lg-4"></div>
+</div>
+
+<div class="row">
+    <div class="col-lg-6 text-center">
+        <h2>ORDERED BURGERS:</h2>
+        <table class="table table-condensed text-center">
+            <tr>
+                <th>ID</th>
+                <th>Burger's Name</th>
+                <th>Action</th>
+            </tr>
+            {{#each burgers}}
+                {{#unless devoured}}
+                    <tr>
+                        <td class="text-center">{{id}}</td>
+                        <td>{{burger_name}}</td>
+                        <td>
+                            <form action="/burger/{{id}}?_method=PUT" method="POST">
+                                <input type="submit" class="btn-success" value="Devour It!">
+                            </form>
+                        </td>
+                    </tr>
+                {{/unless}}
+            {{/each}}
+        </table>
+    </div>
+    <div class="col-lg-6 text-center">
+        <h2>DEVOURED BURGERS:</h2>
+        <table class="table table-condensed text-center">
+            <tr>
+                <th>ID</th>
+                <th>Burger's Name</th>
+            </tr>
+            {{#each burgers}}
+                {{#if devoured}}
+                    <tr>
+                        <td>{{id}}</td>
+                        <td>{{burger_name}}</td>
+                    </tr>
+                {{/if}}
+            {{/each}}
+        </table>
+    </div>
+</div>
